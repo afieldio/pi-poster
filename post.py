@@ -15,7 +15,7 @@ def post(sn, d):
 
     try:
         requests.post('http://crox.io/sensor/sensorsapi/',
-                         auth=HTTPBasicAuth('Aquaman', 'aquaponics'), data=payload)
+                         auth=HTTPBasicAuth('aquaman', 'aquaponics'), data=payload)
     except Exception, e:
         TEXT = "An error has occured when sending the data to the server. The Exception was this: {0}".format(e)
         sendMail('Aquaman@Aquaponics.com', 'a.field738@gmail.com', 'Error has occured', TEXT)
@@ -61,9 +61,12 @@ def post_sensor_data():
     data.update({'AP': air_press})
 
     # Light Sensor
-    light_sensor = TSL2561()
-    light_lux = light_sensor.readLux()
-    data.update({'LS': light_lux})
+	try:
+		light_sensor = TSL2561()
+		light_lux = light_sensor.readLux()
+    		data.update({'LS': light_lux})
+	except Exception, e:
+		pass
 
     # import ipdb; ipdb.set_trace()
     for x in data:
