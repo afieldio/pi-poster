@@ -14,7 +14,7 @@ def post(sn, d):
     payload = {"sensor_name": sn, "data": d}
 
     try:
-        requests.post('http://crox.io/sensor/sensorsapi/',
+        requests.post('http://crox.io/sensorsapi/',
                       auth=HTTPBasicAuth('aquaman', 'aquaponics'), data=payload)
     except Exception, e:
         TEXT = "An error has occured when sending the data to the server. The Exception was this: {0}".format(
